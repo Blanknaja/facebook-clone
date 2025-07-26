@@ -1,7 +1,7 @@
 // src/middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-// import { auth } from '@/lib/auth'; // Import จาก lib/auth.ts ที่เราเคยสร้าง
+import { auth } from '@/lib/auth'; // Import จาก lib/auth.ts ที่เราเคยสร้าง
 
 // รายชื่อหน้าที่เป็น Public (สำหรับผู้ที่ยังไม่ได้ Login)
 const publicRoutes = ['/login', '/register'];
@@ -11,8 +11,8 @@ const protectedRoutes = ['/feed', '/settings'];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-//   const session = await auth(); // ตรวจสอบ session ปัจจุบัน
-  const session = false;
+  const session = await auth(); // ตรวจสอบ session ปัจจุบัน
+//   const session = false;
 
   const isPublicRoute = publicRoutes.includes(pathname);
   const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
