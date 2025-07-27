@@ -72,3 +72,8 @@ export async function registerAction(prevState: any, formData: FormData) {
       return { success: false, message: "เกิดข้อผิดพลาดบางอย่าง" };
     }
   }
+
+
+  export async function signInWithGoogle() {
+    await signIn("google", { redirectTo: "/feed" });
+  }
